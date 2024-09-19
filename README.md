@@ -55,8 +55,9 @@ To get started with the project locally, follow these steps:
 
     Navigate to ```http://127.0.0.1:8000```in your browser.
 
+---
 
-# Usage
+# **Usage**
 
 ## User Registration and Authentication
 

@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Portfolio</title>
+    <link rel="stylesheet" href="{% static 'user/css/user-detail.css' %}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">YourLogo</a>
+            <ul class="nav-links">
+                {% if user %}
+                    <li><a href="{% url 'user-profile' %}" class="nav-link">{{ user.username }}</a></li>
+                    <li><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                    <li><a href="{% url 'register' %}" class="nav-link signup">Signup</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{% url 'home-page' %}" class="logo">
+                <img src="{% static 'icons/logo.png' %}" alt="Logo" width="100" height="100">
+            </a>
+            <ul class="nav-links">
+                {% if user %}
+                    <li><a href="#" class="nav-link">{{ user.username }}</a></li>
+                    <li><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                {% else %}
+                    <li><a href="#" class="nav-link">Login</a></li>
+                    <li><a href="#" class="nav-link signup">Signup</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="user-profile">
+        <div class="profile-info">
+            <img src="{{ user.profile_picture.url }}" alt="User Picture" class="profile-picture">
+            <h1 class="user-name">{{ user.get_full_name }}</h1>
+        </div>
+        <div class="social-tags">
+            {% if social_tags.linkedin %}
+                <a href="{{ social_tags.linkedin }}" class="social-link">LinkedIn</a>
+            {% endif %}
+            {% if social_tags.github %}
+                <a href="{{ social_tags.github }}" class="social-link">GitHub</a>
+            {% endif %}
+            {% if social_tags.twitter %}
+                <a href="{{ social_tags.twitter }}" class="social-link">Twitter</a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <section class="portfolio-section">
+        <h2 class="section-title">My Portfolio</h2>
+        {% if request.user == portfolio.user %}
+                <form id="delete-portfolio-form" action="{% url 'portfolio_delete' portfolio.pk %}" method="POST" onsubmit="return confirm('Are you sure you want to delete this portfolio?');">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-button">Delete Portfolio</button>
+                </form>
+            {% endif %}
+        <div class="portfolio-grid">
+            {% for portfolio in portfolios %}
+            <div class="portfolio-card">
+                <a href="{% url 'portfolio_detail' portfolio.pk %}">
+                    <img src="{{ portfolio.thumbnail.url }}" alt="Project Image">
+                    <h3>{{ portfolio.title }}</h3>
+                    <p>{{ portfolio.description }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>    
+</body>
+</html>

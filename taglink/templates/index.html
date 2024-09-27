@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Showcase your talent to the world and connect with creatives.">
+    <meta name="keywords" content="talent, portfolio, creative community, showcase, collaborate">
+    <title>Talent Showcase</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+    <!-- Header Section -->
+<header class="hero-section">
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{% url 'home-page' %}" class="logo">
+                <img src="{% static 'icons/logo.png' %}" alt="Logo" width="100" height="100">
+            </a>
+            <ul class="nav-links">
+                {% if user %}
+                    <li><a href="{% url 'user-profile' %}" class="nav-link">{{ user.username }}</a></li>
+                    <li><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                    <li><a href="{% url 'register' %}" class="nav-link signup">Signup</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="intro">
+        <div class="intro-content">
+            <div class="hero-content intro-section" id="div1">
+                <h1>Showcase Your Talent to the World</h1>
+                <p>Connect with creatives and share your work with potential collaborators and employers.</p>
+                
+                {% if not user %}
+                <a href="#get-started" id="show" class="cta-button">Get Started – Create Your Portfolio Now</a>
+                {% else %}
+                    <a href="{% url 'home-page' %}" class="cta-button">Continue Your Exploration</a>
+                {% endif %}
+            
+            </div>
+            {% if not user %}
+            <div class="form-container intro-section">
+                <!-- Sign Up Form Section -->
+                <div class="signup-form">
+                    <h2>Join the Community</h2>
+                    <form action="{% url 'landing-page' %}" method="post">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="{{ form.username.id_for_label }}">Username:</label><br>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                                <div class="error-message">
+                                    {{ form.username.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="{{ form.email.id_for_label }}">Email:</label><br>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="error-message">
+                                    {{ form.email.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="{{ form.password1.id_for_label }}">Password:</label><br>
+                            {{ form.password1 }}
+                            {% if form.password1.errors %}
+                                <div class="error-message">
+                                    {{ form.password1.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="{{ form.password2.id_for_label }}">Confirm Password:</label><br>
+                            {{ form.password2 }}
+                            {% if form.password2.errors %}
+                                <div class="error-message">
+                                    {{ form.password2.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    
+                        <button type="submit" class="cta-button">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</header>
+
+
+    <!-- Benefits -->
+    <section class="features">
+        <h2 class="header-text">Why Join Us?</h2>
+        <div class="row">
+            <div class="card">
+                <img src="icons/folder-icon.svg" alt="Portfolios icon">
+                <h4>Create Your Portfolio</h4>
+                <p>Easily manage your portfolios and projects and get noticed by a wider audience.</p>
+            </div>
+            <div class="card">
+                <img src="icons/network-icon.svg" alt="Network icon">
+                <h4>Connect with Creatives</h4>
+                <p>Engage with a creative community and share your work with potential collaborators and employers.</p>
+                
+            </div>
+            <div class="card">
+                <img src="icons/handshake-icon.svg" alt="Employers icon">
+                <h4>Attract Potential Employers</h4>
+                <p>The platform helps you connect to a wider audience and attract potential employers or collaborators.</p>
+            </div>
+            <div class="card">
+                <img src="icons/presentation-icon.svg" alt="Presentation icon">
+                <h4>Showcase Your Work</h4>
+                <p>Share your work on social media with a single click and get noticed by a wider audience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <ol>
+            <li>Sign Up for Free.</li>
+            <li>Create Your Profile and Portfolio.</li>
+            <li>Showcase Your Work and Connect with Others.</li>
+            <li>Grow Your Network and Attract Opportunities.</li>
+        </ol>
+    </section>
+
+    <!-- Repeated CTA -->
+    <section class="cta-section">
+        <a href="#get-started" class="cta-button">Start Showcasing Your Talent</a>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-links">
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+        </div>
+        <div class="social-media">
+            <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+            <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+            <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

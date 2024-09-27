@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="{% static 'portfolio/css/portfolio-form.css' %}">
+</head>
+<body>       
+            
+    <div class="project-details">
+        <h2>Project Details</h2>
+        <form class="portfolio-form" method="POST" action="{% url 'create_project' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+    
+            <div class="project-group">
+                <label for="project-title">Project Name</label>
+                {{ project_form.title }}
+            </div>
+    
+            <div class="project-group">
+                <label for="project-description">Project Description</label>
+                {{ project_form.description }}
+            </div>
+    
+            <!-- Project Resource Links -->
+            <div class="resource-links">
+                <h3>Resources:</h3>
+                {{ resource_link_formset.management_form }}
+                {% for form in resource_link_formset %}
+                    <div class="link-group">
+                        <label for="link-name">Link Name</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="link-group">
+                        <label for="link-url">Link URL</label>
+                        {{ form.url }}
+                    </div>
+                {% endfor %}
+                <button type="button" class="add-link-button">Add Another Link</button>
+            </div>
+    
+            <!-- Project Images -->
+            <div class="project-group">
+                <label for="project-images">Upload Images</label>
+                {{ project_image_formset.management_form }}
+                {% for form in project_image_formset %}
+                    <div class="image-group">
+                        {{ form.image }}
+                    </div>
+                {% endfor %}
+            </div>
+    
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <button type="submit" class="save-button">Save Project</button>
+                <a href="{% url 'portfolio-detail' %}" class="cancel-button">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

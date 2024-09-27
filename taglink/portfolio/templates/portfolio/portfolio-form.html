@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="{% static 'portfolio/css/portfolio-form.css' %}">
+</head>
+<body>
+
+    <div class="portfolio-details">
+        <h2>Create Portfolio</h2>
+        <form class="portfolio-form" method="POST" action="{% url 'create_portfolio' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Portfolio Name -->
+            <div class="form-group">
+                <label for="portfolio-name">Portfolio Name</label>
+                {{ form.title.errors }}
+                {{ form.title }}
+            </div>
+    
+            <!-- Portfolio Description -->
+            <div class="form-group">
+                <label for="portfolio-description">Description</label>
+                {{ form.description.errors }}
+                {{ form.description }}
+            </div>
+    
+            <!-- Portfolio Tags -->
+            <div class="form-group">
+                <label for="portfolio-tags">Tags</label>
+                {{ form.tags.errors }}
+                {{ form.tags }}
+                <small class="form-text">Tags can be like web-development, DSA, frontend, etc.</small>
+            </div>
+    
+            <div class="form-actions">
+                <button type="submit" class="save-button">Save Portfolio</button>
+                <a href="{% url 'user-profile' %}" class="cancel-button">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

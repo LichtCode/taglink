@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="{% static 'user/css/register-or-login.css' %}">
+</head>
+<body>
+
+    <!-- Container for Forms -->
+    <div class="form-container">
+        <!-- Registration Form -->
+        <div class="form-wrapper" id="registration-form">
+            <h2>Create an Account</h2>
+            <form action="{% url 'register' %}" method="POST" class="user-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" value="{{ form.username.value }}" required>
+                    {% if form.username.errors %}
+                        <div class="error-message">
+                            {{ form.username.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{ form.email.value }}" required>
+                    {% if form.email.errors %}
+                        <div class="error-message">
+                            {{ form.email.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="password1">Password</label>
+                    <input type="password" id="password1" name="password1" required>
+                    {% if form.password1.errors %}
+                        <div class="error-message">
+                            {{ form.password1.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="password2">Confirm Password</label>
+                    <input type="password" id="password2" name="password2" required>
+                    {% if form.password2.errors %}
+                        <div class="error-message">
+                            {{ form.password2.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="form-button">Register</button>
+                </div>
+                <div class="toggle-link">
+                    <p>Already have an account? <a href="#" onclick="showLoginForm()">Login here</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Login Form -->
+        <div class="form-wrapper" id="login-form">
+            <h2>Login to Your Account</h2>
+            <form action="{% url 'login' %}" method="POST" class="user-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" value="{{ form.username.value }}" required>
+                    {% if form.username.errors %}
+                        <div class="error-message">
+                            {{ form.username.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    {% if form.password.errors %}
+                        <div class="error-message">
+                            {{ form.password.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="form-button">Login</button>
+                </div>
+                <div class="toggle-link">
+                    <p>Don't have an account? <a href="#" onclick="showRegistrationForm()">Register here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'user/js/register-or-login.js' %}"></script>
+</body>
+</html>

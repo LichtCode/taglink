@@ -1,0 +1,111 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #E1F7F5;
+    color: #1E0342;
+}
+
+/* Edit User Details Section */
+.edit-user-details {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #F7FCFC;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-user-details h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1E0342;
+}
+
+.user-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #1E0342;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="file"] {
+    padding: 10px;
+    border: 2px solid #9AC8CD;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #1E0342;
+}
+
+.form-group input[type="file"] {
+    padding: 5px;
+}
+
+.form-text {
+    font-size: 0.9rem;
+    color: #1E0342;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.save-button,
+.cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.save-button {
+    background-color: #0E46A3;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #9AC8CD;
+}
+
+.cancel-button {
+    background-color: #E1F7F5;
+    color: #1E0342;
+}
+
+.cancel-button:hover {
+    background-color: #9AC8CD;
+    color: #1E0342;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .edit-user-details {
+        padding: 15px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

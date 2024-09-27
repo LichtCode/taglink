@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="register-or-login.css">
+</head>
+<body>
+
+    <!-- Container for Forms -->
+    <div class="form-container">
+        <!-- Registration Form -->
+        <div class="form-wrapper" id="registration-form">
+            <h2>Create an Account</h2>
+            <form action="#" method="POST" class="user-form">
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="full-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="form-button">Register</button>
+                </div>
+                <div class="toggle-link">
+                    <p>Already have an account? <a href="#" onclick="showLoginForm()">Login here</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Login Form -->
+        <div class="form-wrapper" id="login-form">
+            <h2>Login to Your Account</h2>
+            <form action="#" method="POST" class="user-form">
+                <div class="form-group">
+                    <label for="email-login">Email</label>
+                    <input type="email" id="email-login" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password-login">Password</label>
+                    <input type="password" id="password-login" name="password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="form-button">Login</button>
+                </div>
+                <div class="toggle-link">
+                    <p>Don't have an account? <a href="#" onclick="showRegistrationForm()">Register here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="register-or-login.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Detail</title>
+    <link rel="stylesheet" href="portfolio-detail.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">YourLogo</a>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link">Login</a></li>
+                <li><a href="#" class="nav-link signup">Signup</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="user-profile">
+        <div class="profile-info">
+            <img src="{{ user.profile_picture.url }}" alt="User Picture" class="profile-picture">
+            <h1 class="user-name">{{ user.get_full_name }}</h1>
+        </div>
+        <div class="social-tags">
+            {% if social_tags.linkedin %}
+                <a href="{{ social_tags.linkedin }}" class="social-link">LinkedIn</a>
+            {% endif %}
+            {% if social_tags.github %}
+                <a href="{{ social_tags.github }}" class="social-link">GitHub</a>
+            {% endif %}
+            {% if social_tags.twitter %}
+                <a href="{{ social_tags.twitter }}" class="social-link">Twitter</a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="portfolio-detail">
+        <h2 class="portfolio-title">{{ portfolio.title }}</h2>
+        <p class="portfolio-description">{{ portfolio.description }}</p>
+        <div class="portfolio-tags">
+            {% for tag in portfolio.tags.all %}
+                <span class="tag">{{ tag.name }}</span>
+            {% endfor %}
+        </div>
+        <div class="portfolio-stats">
+            <div class="likes">
+                <form id="like-form" action="{% url 'like_portfolio' portfolio.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="like-button">
+                        <i class="pe-7s-like"></i> <span id="like-count">{{ likes_count }}</span>
+                    </button>
+                </form>
+            </div>
+            <div class="comments">
+                <i class="pe-7s-comment"></i> <span>{{ comments.count }}</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-container">
+        <div class="projects">
+            {% for project in projects %}
+            <!-- Repeat this section for each project -->
+            <div class="project-section">
+                <h3 class="project-title">{{ project.title }}</h3>
+                <div class="project-details">
+                    <p>{{ project.description }}</p>
+                    <div class="external-links">
+                        <h4>Resources:</h4>
+                        <ul>
+                            {% for link in project.resource_links.all %}
+                                <li><a href="{{ link.url }}" class="resource-link">{{ link.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="carousel">
+                        {% for image in project.images.all %}
+                            <img src="{{ image.image.url }}" alt="Project Image" class="carousel-image">
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    
+        <div class="comments-section">
+            <h2>Comments</h2>
+            <form action="{% url 'add_comment' portfolio.pk %}" method="POST">
+                {% csrf_token %}
+                <textarea name="comment" rows="4" required placeholder="Add your comment..."></textarea>
+                <button type="submit" class="btn btn-primary">Submit Comment</button>
+            </form>
+            {% for comment in comments %}
+            <div class="comment">
+                <h4 class="commenter-name">{{ comment.user.get_full_name }}</h4>
+                <p class="comment-text">{{ comment.comment }}</p>
+                <br>
+                <hr>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+</body>
+</html>

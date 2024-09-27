@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="portfolio-form.css">
+</head>
+<body>
+
+    <div class="portfolio-details">
+        <h2>Create Portfolio</h2>
+        <form class="portfolio-form" method="POST" action="{% url 'create_portfolio' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Portfolio Name -->
+            <div class="form-group">
+                <label for="portfolio-name">Portfolio Name</label>
+                <input type="text" id="portfolio-name" name="title" placeholder="Enter portfolio name" required>
+            </div>
+    
+            <!-- Portfolio Description -->
+            <div class="form-group">
+                <label for="portfolio-description">Description</label>
+                <textarea id="portfolio-description" name="description" rows="5" placeholder="Describe your portfolio" required></textarea>
+            </div>
+    
+            <!-- Portfolio Tags -->
+            <div class="form-group">
+                <label for="portfolio-tags">Tags</label>
+                <input type="text" id="portfolio-tags" name="tags" placeholder="Add tags, separated by commas" required>
+                <small class="form-text">Tags can be like web-development, DSA, frontend, etc.</small>
+            </div>
+    
+            <!-- Projects Section -->
+            <div class="project-details">
+                <h2>Project Details</h2>
+    
+                <div class="project-group">
+                    <label for="project-title">Project Name</label>
+                    <input type="text" id="project-title" name="project_title" placeholder="Enter project name" required>
+                </div>
+    
+                <div class="project-group">
+                    <label for="project-description">Project Description</label>
+                    <textarea id="project-description" name="project_description" rows="4" placeholder="Describe your project" required></textarea>
+                </div>
+    
+                <!-- Project Resource Links -->
+                <div class="resource-links">
+                    <h3>Resources:</h3>
+                    <div class="link-group">
+                        <label for="link-name">Link Name</label>
+                        <input type="text" id="link-name" name="link_name" placeholder="Enter the name of the link">
+                    </div>
+                    <div class="link-group">
+                        <label for="link-url">Link URL</label>
+                        <input type="url" id="link-url" name="link_url" placeholder="Enter the link URL">
+                    </div>
+                    <button type="button" class="add-link-button">Add Another Link</button>
+                </div>
+    
+                <!-- Project Images -->
+                <div class="project-group">
+                    <label for="project-images">Upload Images</label>
+                    <input type="file" id="project-images" name="project_images" multiple>
+                </div>
+            </div>
+    
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <button type="submit" class="save-button">Save Portfolio</button>
+                <a href="{% url 'portfolio_list' %}" class="cancel-button">Cancel</a>
+            </div>
+        </form>
+    </div>
+    
+    <script src="portfolio-form.js"></script>
+</body>
+</html>

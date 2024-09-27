@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Portfolio</title>
+    <link rel="stylesheet" href="user-detail-v1.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">YourLogo</a>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link">Login</a></li>
+                <li><a href="#" class="nav-link signup">Signup</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="user-profile">
+        <div class="profile-info">
+            <img src="{{ user.profile_picture.url }}" alt="User Picture" class="profile-picture">
+            <h1 class="user-name">{{ user.get_full_name }}</h1>
+        </div>
+        <div class="social-tags">
+            {% if social_tags.linkedin %}
+                <a href="{{ social_tags.linkedin }}" class="social-link">LinkedIn</a>
+            {% endif %}
+            {% if social_tags.github %}
+                <a href="{{ social_tags.github }}" class="social-link">GitHub</a>
+            {% endif %}
+            {% if social_tags.twitter %}
+                <a href="{{ social_tags.twitter }}" class="social-link">Twitter</a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <section class="portfolio-section">
+        <h2 class="section-title">My Portfolio</h2>
+        <div class="portfolio-grid">
+            {% for portfolio in portfolios %}
+            <div class="portfolio-card">
+                <a href="{% url 'portfolio_detail' portfolio.pk %}">
+                    <img src="{{ portfolio.thumbnail.url }}" alt="Project Image">
+                    <h3>{{ portfolio.title }}</h3>
+                    <p>{{ portfolio.description }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>    
+</body>
+</html>

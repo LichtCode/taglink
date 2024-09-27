@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebApp Index</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">YourLogo</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search portfolios, talents..." class="search-input">
+                <button class="search-button">Search</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link">Login</a></li>
+                <li><a href="#" class="nav-link signup">Signup</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Top Portfolios Section -->
+    <section class="top-portfolios">
+        <h2>Top Portfolios</h2>
+        <div class="portfolio-grid">
+            {% for portfolio in top_portfolios %}
+            <div class="portfolio-card">
+                <h3>{{ portfolio.title }}</h3>
+                <p>by <span class="portfolio-owner">{{ portfolio.user.username }}</span></p>
+                <div class="portfolio-stats">
+                    <span><i class="pe-7s-like"></i> {{ portfolio.num_likes }} Likes</span>
+                    <span><i class="pe-7s-comment"></i> {{ portfolio.num_comments }} Comments</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+    <!-- Top Talents Section -->
+    <section class="top-talents">
+        <h2>Top Talents</h2>
+        <div class="talent-grid">
+            {% for talent in top_talents %}
+            <div class="talent-card">
+                <img src="{{ talent.profile_picture.url }}" alt="User Picture" class="talent-picture">
+                <h3 class="talent-name">{{ talent.username }}</h3>
+                <div class="social-tags">
+                    {% if talent.socialtags.linkedin %}<a href="{{ talent.socialtags.linkedin }}" class="social-link">LinkedIn</a>{% endif %}
+                    {% if talent.socialtags.github %}<a href="{{ talent.socialtags.github }}" class="social-link">GitHub</a>{% endif %}
+                    {% if talent.socialtags.twitter %}<a href="{{ talent.socialtags.twitter }}" class="social-link">Twitter</a>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+    <!-- New Talents Section -->
+    <section class="new-talents">
+        <h2>New Talents</h2>
+        <div class="talent-grid">
+            {% for talent in new_talents %}
+            <div class="talent-card">
+                <img src="{{ talent.profile_picture.url }}" alt="User Picture" class="talent-picture">
+                <h3 class="talent-name">{{ talent.username }}</h3>
+                <div class="social-tags">
+                    {% if talent.socialtags.linkedin %}<a href="{{ talent.socialtags.linkedin }}" class="social-link">LinkedIn</a>{% endif %}
+                    {% if talent.socialtags.github %}<a href="{{ talent.socialtags.github }}" class="social-link">GitHub</a>{% endif %}
+                    {% if talent.socialtags.twitter %}<a href="{{ talent.socialtags.twitter }}" class="social-link">Twitter</a>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+</html>
